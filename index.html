@@ -11,37 +11,65 @@
 
 <body>
 
-	<dir name="Main Things">
+	<div class="row">
 	
-		<h3 id="thing-value"><br></h3>
-		<h5 id="tps-value"><br></h5>
-		<span title="Click to produce things."><button id="thing-button">THING</button></span>
+		<div class="left">
 		
-	</dir>
-	
-	<dir name="building1 Section">
-	
-		<span title="Each building1 produces a base 0.1 things per second."><button id="building1-purchase"></button></span>
+			<span title="Each bird produces 0.1 eggs per second."><button id="bird_purchase"></button></span>
 		
-		<h4 id="building1-value"><br></h4>
+			<h4 id="bird_value"><br></h4>
+			
+			<span title="Each farmer produces a base 0.5 eggs per second."><button id="farmer_purchase"></button></span>
 		
-	</dir>
-	
-	<dir name="building2 Section">
-	
-		<span title="Each building2 produces a base 0.5 eggs per second."><button id="building2-purchase"></button></span>
+			<h4 id="farmer_value"><br></h4>
+			
+		</div>
 		
-		<h4 id="building2-value"><br></h4>
+		<div class="center">
+			
+			<h3 id="egg_value"><br></h3>
+			
+			<h5 id="eps_value"><br></h5>
+			
+			<span title="Click to produce things."><button id="egg_button">THING</button></span>
 		
-	</dir>
-	
-	<dir name="Upgrade Section">
-	
-		<span title="Clicking and building1s are twice as effective"><button id="upgrade1">Upgrade 1: 100 things</button></span>
+		</div>
 		
-		<span title="building2s are twice as efficient."><button id="upgrade2">Upgrade2: 500 eggs</button></span>
-	
-	</dir>
+		<div class="right">
+		
+			<div class="upgrades">
+		
+			<h2>Upgrades</h2>
+		
+			<select id="upgrade_list"></select>
+			
+			<button id="upgrade_purchase">PURCHASE</button>
+		
+			<h3 id="upgrade_cost"></h3>
+		
+			<h3 id="upgrade_description"></h3>
+		
+			<hr>
+			
+			</div>
+			
+			<div class="tech">
+			
+			<h2>Technology</h2>
+		
+			<select id="tech_list"></select>
+			
+			<button id="tech_purchase">PURCHASE</button>
+		
+			<h3 id="tech_cost"></h3>
+		
+			<h3 id="tech_description"></h3>
+		
+			<hr>
+		
+			</div>
+		
+	</div>
 
 </body>
 

@@ -118,31 +118,31 @@ function calcEPS() {
 
 function redrawValues() {
 	if (eggs != 1)
-		EGG_VALUE.innerHTML = `${Math.round(eggs)} eggs`;
+		EGG_VALUE.textContent = `${Math.round(eggs)} eggs`;
 	else
-		EGG_VALUE.innerHTML = `${Math.round(eggs)} egg`;
+		EGG_VALUE.textContent = `${Math.round(eggs)} egg`;
 	if (calcEPS() > 0) {
 		if (calcEPS() != 1)
-			EPS.innerHTML = `${ Math.round(calcEPS() * 10) / 10 } eggs per second`;
+			EPS.textContent = `${ Math.round(calcEPS() * 10) / 10 } eggs per second`;
 		else
-			EPS.innerHTML = `${ Math.round(calcEPS() * 10) / 10 } egg per second`;
+			EPS.textContent = `${ Math.round(calcEPS() * 10) / 10 } egg per second`;
 	}
 	if (birdCount != 1)
-		BIRD_VALUE.innerHTML = `${birdCount} birds`;
+		BIRD_VALUE.textContent = `${birdCount} birds`;
 	else
-		BIRD_VALUE.innerHTML = `${birdCount} bird`;
+		BIRD_VALUE.textContent = `${birdCount} bird`;
 	if (getBirdCost() != 1)
-		BIRD_BUY.innerHTML = `Purchase bird: ${getBirdCost()} eggs`;
+		BIRD_BUY.textContent = `Purchase bird: ${getBirdCost()} eggs`;
 	else
-		BIRD_BUY.innerHTML = `Purchase bird: ${getBirdCost()} egg`;
+		BIRD_BUY.textContent = `Purchase bird: ${getBirdCost()} egg`;
 	if (farmerCount != 1)
-		FARMER_VALUE.innerHTML = `${farmerCount} farmers`;
+		FARMER_VALUE.textContent = `${farmerCount} farmers`;
 	else
-		FARMER_VALUE.innerHTML = `${farmerCount} farmer`;
+		FARMER_VALUE.textContent = `${farmerCount} farmer`;
 	if (getFarmerCost() != 1)
-		FARMER_BUY.innerHTML = `Purchase farmer: ${getFarmerCost()} eggs`;
+		FARMER_BUY.textContent = `Purchase farmer: ${getFarmerCost()} eggs`;
 	else
-		FARMER_BUY.innerHTML = `Purchase farmer: ${getFarmerCost()} egg`;
+		FARMER_BUY.textContent = `Purchase farmer: ${getFarmerCost()} egg`;
 	if (getTech(selectedTech).cost === 1)
 		TECH_COST.textContent = `Cost: ${getTech(selectedTech).cost} egg`;
 	else if (getTech(selectedTech).cost === "")
@@ -159,9 +159,25 @@ function redrawValues() {
 	UPGRADE_DESCRIPTION.textContent = getUpgrade(selectedUpgrade).description;
 	BIGEGG.style.width = `${window.innerWidth / 4}px`;
 	for (var i = 0; i < HORIZ_BARS.length; i++)
-		HORIZ_BARS[i].style.width = `${window.innerWidth}px`;
+		HORIZ_BARS[i].style.width = `${window.innerWidth - 20}px`;
 	for (var i = 0; i < VERTI_BARS.length; i++)
-		VERTI_BARS[i].style.height = `${window.innerHeight}px`;
+		VERTI_BARS[i].style.height = `${window.innerHeight - 60}px`;
+	if (getBirdCost() <= eggs)
+		BIRD_BUY.style.color = "green";
+	else
+		BIRD_BUY.style.color = "red";
+	if (getFarmerCost() <= eggs)
+		FARMER_BUY.style.color = "green";
+	else
+		FARMER_BUY.style.color = "red";
+	if (getTech(selectedTech).cost <= eggs && getTech(selectedTech).cost != "")
+		TECH_PURCHASE.style.color = "green";
+	else
+		TECH_PURCHASE.style.color = "red";
+	if (getUpgrade(selectedUpgrade).cost <= eggs && getUpgrade(selectedUpgrade).cost != "")
+		UPGRADE_PURCHASE.style.color = "green";
+	else
+		UPGRADE_PURCHASE.style.color = "red";
 }
 
 function getBirdCost() {

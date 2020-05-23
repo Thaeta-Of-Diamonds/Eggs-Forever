@@ -13,19 +13,23 @@ select {
 	vertical-align: top;
 }
 
-#egg_data, #bird_section, #farmer_section, #upgrades, #tech{
+#egg_data, #bird_section, #farmer_section, #boat_section, #upgrades, #tech{
 	background: rgba(89, 87, 80, 0.8);
 	color: white;
 	padding: 3px;
 	font-weight: bold;
 }
 
-#bird_area, #farmer_area{
+#bird_area, #farmer_area, #boat_area{
 	border: 3px outset rgba(179, 179, 162);
 	background: lightgray;
 	color: black;
 	padding: 1px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5), 0 6px 12px 0 rgba(0,0,0,0.4);
+}
+
+#tech_img, #upgrade_img {
+	border: 3px outset rgba(160, 160, 160);
 }
 
 .row {

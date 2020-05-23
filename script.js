@@ -160,6 +160,7 @@ function redrawValues() {
 	else
 		UPGRADE_COST.textContent = `Cost: ${getUpgrade(selectedUpgrade).cost} eggs`;
 	UPGRADE_DESCRIPTION.textContent = getUpgrade(selectedUpgrade).description;
+	BIGEGG.style.width = `${window.innerWidth / 4}px`;
 }
 
 function getBirdCost() {

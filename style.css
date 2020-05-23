@@ -1,15 +1,31 @@
 body {
   background-image: url('woodWall.jpg');
+  margin: 0;
 }
 
 button {
-	font-size: 10px;
+	height: 48px;
+	vertical-align: top;
 }
 
-.egg_data, #bird_section, #farmer_section, #upgrades, #tech{
-	background: rgba(89, 87, 80, 0.6);
+select {
+	height: 48px;
+	vertical-align: top;
+}
+
+#egg_data, #bird_section, #farmer_section, #upgrades, #tech{
+	background: rgba(89, 87, 80, 0.8);
 	color: white;
 	padding: 3px;
+	font-weight: bold;
+}
+
+#bird_area, #farmer_area{
+	border: 3px outset rgba(179, 179, 162);
+	background: lightgray;
+	color: black;
+	padding: 1px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5), 0 6px 12px 0 rgba(0,0,0,0.4);
 }
 
 .row {
@@ -19,27 +35,36 @@ button {
 .left {
 	width: 25%;
 	padding: 3px;
+	overflow-y:auto;
 }
 
 .center {
 	width: 50%;
 	text-align: center;
 	padding: 3px;
+	overflow-y:auto;
 }
 
 .right {
 	width: 25%;
 	padding: 3px;
+	overflow-y:auto;
 }
 
 .vl {
-	border: 6px outset #A47863;
+	border: 10px outset #A47863;
 	height: 200px;
+	width: 0px;
+	background: #A47863;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5), 0 6px 12px 0 rgba(0,0,0,0.4);
 }
 
 .hl {
-	border: 6px outset #A47863;
+	border: 10px outset #A47863;
 	width: 200px;
+	height: 0px;
+	background: #A47863;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5), 0 6px 12px 0 rgba(0,0,0,0.4);
 }
 
 #egg_button {

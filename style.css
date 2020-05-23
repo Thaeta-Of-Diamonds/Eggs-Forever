@@ -1,25 +1,51 @@
+body {
+  background-image: url('woodWall.jpg');
+}
+
 button {
 	font-size: 10px;
 }
 
+.egg_data, #bird_section, #farmer_section, #upgrades, #tech{
+	background: rgba(89, 87, 80, 0.6);
+	color: white;
+	padding: 3px;
+}
+
 .row {
-  display: flex;
+	display: flex;
 }
 
 .left {
 	width: 25%;
+	padding: 3px;
 }
 
 .center {
 	width: 50%;
+	text-align: center;
+	padding: 3px;
 }
 
 .right {
 	width: 25%;
+	padding: 3px;
 }
 
 .vl {
-	border-left: 6px solid black;
-	height: 500px;
-	margin-right: 10px
+	border: 6px outset #A47863;
+	height: 200px;
+}
+
+.hl {
+	border: 6px outset #A47863;
+	width: 200px;
+}
+
+#egg_button {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
 }

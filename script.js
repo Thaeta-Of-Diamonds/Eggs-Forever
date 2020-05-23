@@ -246,7 +246,7 @@ function getFarmerCost() {
 }
 
 function getBoatCost() {
-	return Math.round(500 * Math.pow(1.05, farmerCount));
+	return Math.round(500 * Math.pow(1.05, boatCount));
 }
 
 function getTech(nam) {

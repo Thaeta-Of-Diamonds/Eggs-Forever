@@ -1,4 +1,3 @@
-
 const BIGEGG = document.getElementById("egg_button");
 const EGG_VALUE = document.getElementById("egg_value");
 const EPS = document.getElementById("eps_value");
@@ -19,7 +18,39 @@ const TECH_COST = document.getElementById('tech_cost');
 const TECH_SELECTOR = document.getElementById('tech_list');
 const TECH_PURCHASE = document.getElementById('tech_purchase');
 
+const upgradeData = [
+	{
+		name : "",
+		cost : "",
+		description : "",
+		children: []
+	},
+	{
+		name : "Vibrant Plumage",
+		cost : 100,
+		description : "Birds are twice as efficient"
+	},
+	{
+		name : "Sheer Determination",
+		cost : 50,
+		description : "The mouse is twice as efficient.",
+		children : []
+	},
+	{
+		name : "Capitalism",
+		cost : 90,
+		description : "Farmers are twice as efficient",
+		children : []
+	}
+]
+
 const techData = [
+	{
+		name : "",
+		cost : "",
+		description : "",
+		children: []
+	},
 	{
 		name : "Origin",
 		cost : 10,
@@ -27,8 +58,7 @@ const techData = [
 		children : [
 			"Ornithology",
 			"Feudalism"
-		],
-		"selected" : true
+		]
 	},
 	{
 		name : "Ornithology",
@@ -50,10 +80,10 @@ var farmerCount = 0;
 var upgradesUnlocked = [];
 var techUnlocked = [];
 var selectedTech = "Origin";
-addTech(getTech("Origin"));
+var selectedUpgrade = "";
 
 function addClick() {
-	var value = 1;
+	var value = 1000;
 	if (upgradesUnlocked.includes("Upgrade 1"))
 		value *= 2;
 	eggs += value;
@@ -116,11 +146,20 @@ function redrawValues() {
 		FARMER_BUY.innerHTML = `Purchase bird: ${getFarmerCost()} eggs`;
 	else
 		FARMER_BUY.innerHTML = `Purchase bird: ${getFarmerCost()} egg`;
-	if (getTech(selectedTech).cost != 1)
-		TECH_COST.textContent = `Cost: ${getTech(selectedTech).cost} eggs`;
-	else
+	if (getTech(selectedTech).cost === 1)
 		TECH_COST.textContent = `Cost: ${getTech(selectedTech).cost} egg`;
+	else if (getTech(selectedTech).cost === "")
+		TECH_COST.textContent = "";
+	else
+		TECH_COST.textContent = `Cost: ${getTech(selectedTech).cost} eggs`;
 	TECH_DESCRIPTION.textContent = getTech(selectedTech).description;
+	if (getUpgrade(selectedUpgrade).cost === 1)
+		UPGRADE_COST.textContent = `Cost: ${getUpgrade(selectedUpgrade).cost} egg`;
+	else if (getUpgrade(selectedUpgrade).cost === "")
+		UPGRADE_COST.textContent = "";
+	else
+		UPGRADE_COST.textContent = `Cost: ${getUpgrade(selectedUpgrade).cost} eggs`;
+	UPGRADE_DESCRIPTION.textContent = getUpgrade(selectedUpgrade).description;
 }
 
 function getBirdCost() {
@@ -139,6 +178,16 @@ function getTech(nam) {
 
 function addTech(technology) {
 	TECH_SELECTOR.options.add( new Option(technology.name, technology.name, technology.selected) );
+}
+
+function getUpgrade(nam) {
+	for (var i = 0; i < upgradeData.length; i++)
+		if (upgradeData[i].name === nam)
+			return upgradeData[i];
+}
+
+function addUpgrade(upgrade) {
+	UPGRADE_SELECTOR.options.add( new Option(upgrade.name, upgrade.name, upgrade.selected) );
 }
 
 BIGEGG.addEventListener("click", addClick, false);
@@ -170,10 +219,16 @@ TECH_PURCHASE.addEventListener("click", function(){
 				addTech(getTech(getTech(selectedTech).children[i]));
 		}
 		TECH_SELECTOR.remove(TECH_SELECTOR.selectedIndex);
-		selectedTech = TECH_SELECTOR.selectedOptions[0].value;
+		if (TECH_SELECTOR.selectedOptions.length > 0)
+			selectedTech = TECH_SELECTOR.selectedOptions[0].value;
+		else
+			selectedTech = "";
 	}
+	console.log(eggs >= getTech(selectedTech).cost);
 }, false);
 
-var gainTPS = setInterval(addEPS,1000);
+var gainEPS = setInterval(addEPS,1000);
 
 var repeatRedraw = setInterval(redrawValues,1);
+
+addTech(getTech("Origin"));

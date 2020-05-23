@@ -69,7 +69,7 @@ const techData = [
 	{
 		name : "Origin",
 		cost : 10,
-		description : "The start of the wrath of eggs.",
+		description : "To perfect the world, you must first perfect yourself.",
 		image: "origin.png"
 	},
 	{

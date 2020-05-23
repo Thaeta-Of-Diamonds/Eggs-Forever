@@ -18,12 +18,14 @@ const TECH_COST = document.getElementById('tech_cost');
 const TECH_SELECTOR = document.getElementById('tech_list');
 const TECH_PURCHASE = document.getElementById('tech_purchase');
 
+const HORIZ_BARS = document.getElementsByClassName('hl');
+const VERTI_BARS = document.getElementsByClassName('vl');
+
 const upgradeData = [
 	{
 		name : "",
 		cost : "",
-		description : "",
-		children: []
+		description : ""
 	},
 	{
 		name : "Vibrant Plumage",
@@ -33,14 +35,12 @@ const upgradeData = [
 	{
 		name : "Sheer Determination",
 		cost : 50,
-		description : "The mouse is twice as efficient.",
-		children : []
+		description : "The mouse is twice as efficient."
 	},
 	{
 		name : "Capitalism",
 		cost : 90,
-		description : "Farmers are twice as efficient",
-		children : []
+		description : "Farmers are twice as efficient"
 	}
 ]
 
@@ -48,55 +48,52 @@ const techData = [
 	{
 		name : "",
 		cost : "",
-		description : "",
-		children: []
+		description : ""
 	},
 	{
 		name : "Origin",
 		cost : 10,
-		description : "The start of the wrath of eggs.",
-		children : [
-			"Ornithology",
-			"Feudalism"
-		]
+		description : "The start of the wrath of eggs."
 	},
 	{
 		name : "Ornithology",
 		cost : 12,
-		description : "Birds are cool!",
-		children : []
+		description : "Birds are cool!"
 	},
 	{
 		name : "Feudalism",
 		cost : 15,
-		description : "Farming class.",
-		children : []
+		description : "Farming class."
 	}
 ]
 
 var eggs = 0;
+var totalEggs = 0;
 var birdCount = 0;
 var farmerCount = 0;
 var upgradesUnlocked = [];
 var techUnlocked = [];
+var milestones = [];
 var selectedTech = "Origin";
 var selectedUpgrade = "";
 
 function addClick() {
-	var value = 1000;
-	if (upgradesUnlocked.includes("Upgrade 1"))
+	var value = 1;
+	if (upgradesUnlocked.includes("Sheer Determination"))
 		value *= 2;
 	eggs += value;
+	totalEggs += value;
 }
 
 function addEPS() {
 	eggs += calcEPS();
+	totalEggs += calcEPS();
 }
 
 function calcBirdEPS() {
 	var value = 0;
 	value += birdCount * 0.1;
-	if (upgradesUnlocked.includes("Upgrade 1"))
+	if (upgradesUnlocked.includes("Vibrant Plumage"))
 		value *= 2;
 	return value;
 }
@@ -104,7 +101,7 @@ function calcBirdEPS() {
 function calcFarmerEPS() {
 	var value = 0;
 	value += farmerCount * 0.5;
-	if (upgradesUnlocked.includes("Upgrade 2"))
+	if (upgradesUnlocked.includes("Capitalism"))
 		value *= 2;
 	return value;
 }
@@ -143,9 +140,9 @@ function redrawValues() {
 	else
 		FARMER_VALUE.innerHTML = `${farmerCount} farmer`;
 	if (getFarmerCost() != 1)
-		FARMER_BUY.innerHTML = `Purchase bird: ${getFarmerCost()} eggs`;
+		FARMER_BUY.innerHTML = `Purchase farmer: ${getFarmerCost()} eggs`;
 	else
-		FARMER_BUY.innerHTML = `Purchase bird: ${getFarmerCost()} egg`;
+		FARMER_BUY.innerHTML = `Purchase farmer: ${getFarmerCost()} egg`;
 	if (getTech(selectedTech).cost === 1)
 		TECH_COST.textContent = `Cost: ${getTech(selectedTech).cost} egg`;
 	else if (getTech(selectedTech).cost === "")
@@ -161,6 +158,10 @@ function redrawValues() {
 		UPGRADE_COST.textContent = `Cost: ${getUpgrade(selectedUpgrade).cost} eggs`;
 	UPGRADE_DESCRIPTION.textContent = getUpgrade(selectedUpgrade).description;
 	BIGEGG.style.width = `${window.innerWidth / 4}px`;
+	for (var i = 0; i < HORIZ_BARS.length; i++)
+		HORIZ_BARS[i].style.width = `${window.innerWidth}px`;
+	for (var i = 0; i < VERTI_BARS.length; i++)
+		VERTI_BARS[i].style.height = `${window.innerHeight}px`;
 }
 
 function getBirdCost() {
@@ -179,6 +180,7 @@ function getTech(nam) {
 
 function addTech(technology) {
 	TECH_SELECTOR.options.add( new Option(technology.name, technology.name, technology.selected) );
+	selectedTech = TECH_SELECTOR.selectedOptions[0].value;
 }
 
 function getUpgrade(nam) {
@@ -189,23 +191,64 @@ function getUpgrade(nam) {
 
 function addUpgrade(upgrade) {
 	UPGRADE_SELECTOR.options.add( new Option(upgrade.name, upgrade.name, upgrade.selected) );
+	selectedUpgrade = UPGRADE_SELECTOR.selectedOptions[0].value;
 }
 
-BIGEGG.addEventListener("click", addClick, false);
+function handleMilestones() {
+	if (techUnlocked.includes("Origin") && ! milestones.includes("Origin")) {
+		milestones.push("Origin");
+		addUpgrade(getUpgrade("Sheer Determination"));
+		addTech(getTech("Ornithology"));
+		addTech(getTech("Feudalism"));
+		toggleElement("upgrades");
+	}
+	if (techUnlocked.includes("Ornithology") && ! milestones.includes("Ornithology")) {
+		milestones.push("Ornithology");
+		addUpgrade(getUpgrade("Vibrant Plumage"));
+	}
+	if (techUnlocked.includes("Feudalism") && ! milestones.includes("Feudalism")) {
+		milestones.push("Feudalism");
+		addUpgrade(getUpgrade("Capitalism"));
+	}
+	if (totalEggs >= 15 && ! milestones.includes("birdUnlock")) {
+		milestones.push("birdUnlock");
+		toggleElement("bird_section");
+	}
+	if (totalEggs >= 100 && ! milestones.includes("farmerUnlock")) {
+		milestones.push("farmerUnlock");
+		toggleElement("farmer_section");
+		toggleElement("tech");
+	}
+}
 
-BIRD_BUY.addEventListener("click", (event) => {
+function toggleElement(imp) {
+  var x = document.getElementById(imp);
+  if (x.style.visibility === "hidden") {
+    x.style.visibility = "visible";
+  } else {
+    x.style.visibility = "hidden";
+  }
+}
+
+function purchaseBird() {
 	if (eggs >= getBirdCost()) {
 		eggs -= getBirdCost();
 		birdCount++;
 	}
-});
+}
 
-FARMER_BUY.addEventListener("click", (event) => {
+function purchaseFarmer() {
 	if (eggs >= getFarmerCost()) {
 		eggs -= getFarmerCost();
 		farmerCount++;
 	}
-});
+}
+
+BIGEGG.addEventListener("click", addClick, false);
+
+BIRD_BUY.addEventListener("click", purchaseBird, false);
+
+FARMER_BUY.addEventListener("click", purchaseFarmer, false);
 
 TECH_SELECTOR.addEventListener('change', (event) => {
   selectedTech = event.target.value;
@@ -215,21 +258,42 @@ TECH_PURCHASE.addEventListener("click", function(){
 	if (eggs >= getTech(selectedTech).cost) {
 		eggs -= getTech(selectedTech).cost;
 		techUnlocked.push(getTech(selectedTech).name);
-		if (getTech(selectedTech).children.length > 0) {
-			for (var i = 0; i < getTech(selectedTech).children.length; i++)
-				addTech(getTech(getTech(selectedTech).children[i]));
-		}
 		TECH_SELECTOR.remove(TECH_SELECTOR.selectedIndex);
-		if (TECH_SELECTOR.selectedOptions.length > 0)
-			selectedTech = TECH_SELECTOR.selectedOptions[0].value;
-		else
+		if (TECH_SELECTOR.selectedOptions.length === 0)
 			selectedTech = "";
+		else
+			selectedTech = TECH_SELECTOR.selectedOptions[0].value;
 	}
-	console.log(eggs >= getTech(selectedTech).cost);
+}, false);
+
+UPGRADE_SELECTOR.addEventListener('change', (event) => {
+  selectedUpgrade = event.target.value;
+});
+
+UPGRADE_PURCHASE.addEventListener("click", function(){
+	if (eggs >= getUpgrade(selectedUpgrade).cost) {
+		eggs -= getUpgrade(selectedUpgrade).cost;
+		upgradesUnlocked.push(getUpgrade(selectedUpgrade).name);
+		UPGRADE_SELECTOR.remove(UPGRADE_SELECTOR.selectedIndex);
+		if (UPGRADE_SELECTOR.selectedOptions.length === 0)
+			selectedUpgrade = "";
+		else
+			selectedUpgrade = UPGRADE_SELECTOR.selectedOptions[0].value;
+	}
 }, false);
 
 var gainEPS = setInterval(addEPS,1000);
 
 var repeatRedraw = setInterval(redrawValues,1);
 
+var repeatMilestones = setInterval(handleMilestones,1);
+
 addTech(getTech("Origin"));
+
+toggleElement("bird_section");
+
+toggleElement("farmer_section");
+
+toggleElement("upgrades");
+
+toggleElement("tech");

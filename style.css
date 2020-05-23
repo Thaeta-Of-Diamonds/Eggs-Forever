@@ -17,3 +17,9 @@ button {
 .right {
 	width: 25%;
 }
+
+.vl {
+	border-left: 6px solid black;
+	height: 500px;
+	margin-right: 10px
+}

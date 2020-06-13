@@ -1,31 +1,54 @@
 body {
-  background-image: url('woodWall.jpg');
-  margin: 0;
-}
-
-button {
-	height: 48px;
-	vertical-align: top;
+	background-image: url('img/woodWall.jpg');
+	margin: 0;
+	font-family: serif;
 }
 
 select {
 	height: 48px;
 	vertical-align: top;
+	width: 200px;
 }
 
-#egg_data, #bird_section, #farmer_section, #boat_section, #upgrades, #tech{
+.text_area {
 	background: rgba(89, 87, 80, 0.8);
 	color: white;
 	padding: 3px;
 	font-weight: bold;
 }
 
-#bird_area, #farmer_area, #boat_area{
+.building_purchase {
 	border: 3px outset rgba(179, 179, 162);
 	background: lightgray;
 	color: black;
 	padding: 1px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5), 0 6px 12px 0 rgba(0,0,0,0.4);
+	vertical-align: middle;
+}
+
+.building_value {
+	text-align: right;
+	color: gray;
+	font-size: 20px;
+}
+
+.building_button {
+	width: 200px;
+	height: 48px;
+	font-size: 24px;
+	font-family: serif;
+}
+
+#upgrade_cost {
+	font-size: 32px;
+}
+
+#paradise_info {
+	text-align: left;
+}
+
+#paradise_value {
+	font-size: 72px;
 }
 
 #tech_img, #upgrade_img {
@@ -37,22 +60,25 @@ select {
 }
 
 .left {
-	width: 25%;
+	width: 30%;
 	padding: 3px;
 	overflow-y:auto;
+	height: 1000px;
 }
 
 .center {
-	width: 50%;
+	width: 40%;
 	text-align: center;
 	padding: 3px;
 	overflow-y:auto;
+	height: 1000px;
 }
 
 .right {
-	width: 25%;
+	width: 30%;
 	padding: 3px;
 	overflow-y:auto;
+	height: 1000px;
 }
 
 .vl {
@@ -77,4 +103,13 @@ select {
 -moz-user-select: none;
 -o-user-select: none;
 user-select: none;
+}
+
+#mission_bar {
+  width: 0%;
+  height: 30px;
+  background-color: #4CAF50;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
 }

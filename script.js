@@ -1275,6 +1275,8 @@ function handleAutosave() {
 	setCookie("paradiseCounter", paradiseCounter.toString(), 1);
 	setCookie("paradisePhase", paradisePhase.toString(), 1);
 	setCookie("paradiseBird", paradiseBird.toString(), 1);
+	
+	window.alert(getCookie(techUnlocked));
 }
 
 /*	|---------------|
@@ -1946,7 +1948,7 @@ function startGame() {
 	
 	addTech(getTech("Origin"));
 	
-	loadSave();
+	// loadSave();
 }
 
 var repeatEPS = setInterval(addSecond,1000);

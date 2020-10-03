@@ -1276,7 +1276,7 @@ function handleAutosave() {
 	setCookie("paradisePhase", paradisePhase.toString(), 1);
 	setCookie("paradiseBird", paradiseBird.toString(), 1);
 	
-	window.alert(getCookie(techUnlocked));
+	window.alert(document.cookie);
 }
 
 /*	|---------------|

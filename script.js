@@ -1254,9 +1254,27 @@ function handleParadise() {
 
 function handleAutosave() {
 	setCookie("eggs", eggs.toString(), 1);
-	eggs += 1;
-	if (getCookie("eggs") != "")
-		window.alert(getCookie("eggs"));
+	setCookie("research", research.toString(), 1);
+	setCookie("totalEggs", totalEggs.toString(), 1);
+	setCookie("birdCount", birdCount.toString(), 1);
+	setCookie("farmerCount", farmerCount.toString(), 1);
+	setCookie("bakeryCount", bakeryCount.toString(), 1);
+	setCookie("boatCount", boatCount.toString(), 1);
+	setCookie("mineCount", mineCount.toString(), 1);
+	setCookie("wellCount", wellCount.toString(), 1);
+	setCookie("factoryCount", factoryCount.toString(), 1);
+	setCookie("supplyCount", supplyCount.toString(), 1);
+	setCookie("starshipCount", starshipCount.toString(), 1);
+	setCookie("spacestatCount", spacestatCount.toString(), 1);
+	setCookie("missionProgress", missionProgress.toString(), 1);
+	setCookie("missionRequired", missionRequired.toString(), 1);
+	setCookie("upgradesUnlocked", upgradesUnlocked.toString(), 1);
+	setCookie("techUnlocked", techUnlocked.toString(), 1);
+	setCookie("milestones", milestones.toString(), 1);
+	setCookie("paradiseEggs", paradiseEggs.toString(), 1);
+	setCookie("paradiseCounter", paradiseCounter.toString(), 1);
+	setCookie("paradisePhase", paradisePhase.toString(), 1);
+	setCookie("paradiseBird", paradiseBird.toString(), 1);
 }
 
 /*	|---------------|
@@ -1353,6 +1371,27 @@ function checkCookie() {
 function loadSave() {
 	if (getCookie("eggs") != "")
 		eggs = parseInt(getCookie("eggs"));
+		research = parseInt(getCookie("research"));
+		totalEggs = parseInt(getCookie("totalEggs"));
+		birdCount = parseInt(getCookie("birdCount"));
+		farmerCount = parseInt(getCookie("farmerCount"));
+		bakeryCount = parseInt(getCookie("bakeryCount"));
+		boatCount = parseInt(getCookie("boatCount"));
+		mineCount = parseInt(getCookie("mineCount"));
+		wellCount = parseInt(getCookie("wellCount"));
+		factoryCount = parseInt(getCookie("factoryCount"));
+		supplyCount = parseInt(getCookie("supplyCount"));
+		starshipCount = parseInt(getCookie("starshipCount"));
+		spacestatCount = parseInt(getCookie("spacestatCount"));
+		missionProgress = parseInt(getCookie("missionProgress"));
+		missionRequired = parseInt(getCookie("missionRequired"));
+		upgradesUnlocked = parseInt(getCookie("upgradesUnlocked"));
+		techUnlocked = parseInt(getCookie("techUnlocked"));
+		milestones = parseInt(getCookie("milestones"));
+		paradiseEggs = parseInt(getCookie("paradiseEggs"));
+		paradiseCounter = parseInt(getCookie("paradiseCounter"));
+		paradisePhase = parseInt(getCookie("paradisePhase"));
+		paradiseBird = parseInt(getCookie("paradiseBird"));
 }
 
 /*	|-----------------|
@@ -1908,9 +1947,6 @@ function startGame() {
 	addTech(getTech("Origin"));
 	
 	loadSave();
-	
-	if (getCookie("eggs") != "")
-		window.alert(getCookie("eggs"));
 }
 
 var repeatEPS = setInterval(addSecond,1000);
